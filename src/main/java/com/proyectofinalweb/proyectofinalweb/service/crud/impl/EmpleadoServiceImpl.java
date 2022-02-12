@@ -79,7 +79,7 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
     public EmpleadoDTO buscarEmpleadoPorDNI(String dni) {
         Empleado empleado = empleadoRepository.findByDni(dni);
         if(empleado == null) {
-            throw new NoSuchElementException("nonexistent id: " + dni);
+           return  null;
         }
         return modelMapper.map(empleado, EmpleadoDTO.class);
     }
@@ -93,6 +93,14 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
         }
         return modelMapper.map(empleado, EmpleadoDTO.class);
 
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public EmpleadoDTO modificarEmpleado(EmpleadoDTO empleadoDTO) {
+        Empleado nuevoEmpleado = modelMapper.map(empleadoDTO, Empleado.class);
+        empleadoRepository.save(nuevoEmpleado);
+        return empleadoDTO;
     }
 
 }
