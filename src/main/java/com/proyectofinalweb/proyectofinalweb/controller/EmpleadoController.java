@@ -29,8 +29,8 @@ public class EmpleadoController {
     }
 
     @RequestMapping(value = DNI, method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<EmpleadoDTO> getOneHotel(@PathVariable("empleado_dni") String empleadoDNI) {
-        logger.info("Get Hotel with id {}", empleadoDNI);
+    public ResponseEntity<EmpleadoDTO> getOneEmpleado(@PathVariable("empleado_dni") String empleadoDNI) {
+        logger.info("Buscar un empleado por dni {}", empleadoDNI);
         EmpleadoDTO empleado = this.empleadoService.buscarEmpleadoPorDNI(empleadoDNI);
         if (empleado == null) {
             return new ResponseEntity<EmpleadoDTO>(HttpStatus.NOT_FOUND);
@@ -39,14 +39,14 @@ public class EmpleadoController {
     }
 
     @RequestMapping(method = RequestMethod.GET,produces = "application/json")
-    public ResponseEntity<Collection<EmpleadoDTO>> getAllHotels(){
+    public ResponseEntity<Collection<EmpleadoDTO>> getAllEmpleados(){
         logger.info("Get All Hotels");
-        Collection<EmpleadoDTO> hotels = new ArrayList<EmpleadoDTO>();
-        hotels.addAll(this.empleadoService.listarTodos());
-        if (hotels.isEmpty()){
+        Collection<EmpleadoDTO> empleados = new ArrayList<EmpleadoDTO>();
+        empleados.addAll(this.empleadoService.listarTodos());
+        if (empleados.isEmpty()){
             return new ResponseEntity<Collection<EmpleadoDTO>>(HttpStatus.NOT_FOUND);
         }else{
-            return new ResponseEntity<Collection<EmpleadoDTO>>(hotels, HttpStatus.OK);
+            return new ResponseEntity<Collection<EmpleadoDTO>>(empleados, HttpStatus.OK);
         }
     }
 
