@@ -39,7 +39,7 @@ public class EmpleadoController {
     }
 
     @RequestMapping(method = RequestMethod.GET,produces = "application/json")
-    public ResponseEntity<Collection<EmpleadoDTO>> getAllEmpleados(){
+    public ResponseEntity<Collection<EmpleadoDTO>> getEmpleados(){
         logger.info("Get All Hotels");
         Collection<EmpleadoDTO> empleados = new ArrayList<EmpleadoDTO>();
         empleados.addAll(this.empleadoService.listarTodos());
